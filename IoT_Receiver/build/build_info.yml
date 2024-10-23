@@ -1,0 +1,50 @@
+cmake:
+  application:
+    configuration-dir: /home/krieger/ws/iot_gateway
+    source-dir: /home/krieger/ws/iot_gateway
+  board:
+    name: esp_wrover_kit
+    qualifiers: esp32/procpu
+    revision: 
+  devicetree:
+    bindings-dirs:
+     - /home/krieger/zephyrproject/zephyr/dts/bindings
+    files:
+     - /home/krieger/zephyrproject/zephyr/boards/espressif/esp_wrover_kit/esp_wrover_kit_procpu.dts
+    include-dirs:
+     - /home/krieger/zephyrproject/modules/hal/atmel/include
+     - /home/krieger/zephyrproject/modules/hal/gigadevice/include
+     - /home/krieger/zephyrproject/modules/hal/microchip/dts
+     - /home/krieger/zephyrproject/modules/hal/nuvoton/dts
+     - /home/krieger/zephyrproject/modules/hal/nxp/dts
+     - /home/krieger/zephyrproject/modules/hal/stm32/dts
+     - /home/krieger/zephyrproject/zephyr/include
+     - /home/krieger/zephyrproject/zephyr/include/zephyr
+     - /home/krieger/zephyrproject/zephyr/dts/common
+     - /home/krieger/zephyrproject/zephyr/dts/x86
+     - /home/krieger/zephyrproject/zephyr/dts/xtensa
+     - /home/krieger/zephyrproject/zephyr/dts/sparc
+     - /home/krieger/zephyrproject/zephyr/dts/riscv
+     - /home/krieger/zephyrproject/zephyr/dts/posix
+     - /home/krieger/zephyrproject/zephyr/dts/nios2
+     - /home/krieger/zephyrproject/zephyr/dts/arm64
+     - /home/krieger/zephyrproject/zephyr/dts/arm
+     - /home/krieger/zephyrproject/zephyr/dts/arc
+     - /home/krieger/zephyrproject/zephyr/dts
+  kconfig:
+    files:
+     - /home/krieger/zephyrproject/zephyr/boards/espressif/esp_wrover_kit/esp_wrover_kit_procpu_defconfig
+     - /home/krieger/ws/iot_gateway/prj.conf
+    user-files:
+     - /home/krieger/ws/iot_gateway/prj.conf
+  toolchain:
+    name: zephyr
+    path: /home/krieger/zephyr-sdk-0.16.8
+  zephyr:
+    version: 3.7.99
+    zephyr-base: /home/krieger/zephyrproject/zephyr
+version: 0.1.0
+west:
+  command: /home/krieger/zephyrproject/.venv/bin/west build -p always -b esp_wrover_kit
+  topdir: /home/krieger/zephyrproject
+  version: 1.2.0
