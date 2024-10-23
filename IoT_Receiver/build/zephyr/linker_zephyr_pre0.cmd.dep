@@ -1,8 +1,8 @@
 linker_zephyr_pre0.cmd: \
  /home/krieger/zephyrproject/zephyr/soc/espressif/esp32/default.ld \
- /home/krieger/ws/iot_gateway/build/zephyr/include/generated/zephyr/autoconf.h \
+ /home/krieger/ws/Bachelor/test2/build/zephyr/include/generated/zephyr/autoconf.h \
  /home/krieger/zephyrproject/zephyr/include/zephyr/devicetree.h \
- /home/krieger/ws/iot_gateway/build/zephyr/include/generated/zephyr/devicetree_generated.h \
+ /home/krieger/ws/Bachelor/test2/build/zephyr/include/generated/zephyr/devicetree_generated.h \
  /home/krieger/zephyrproject/zephyr/include/zephyr/irq_multilevel.h \
  /home/krieger/zephyrproject/zephyr/include/zephyr/sys/util.h \
  /home/krieger/zephyrproject/zephyr/include/zephyr/sys/util_macro.h \
@@ -32,22 +32,22 @@ linker_zephyr_pre0.cmd: \
  /home/krieger/zephyrproject/zephyr/include/zephyr/linker/section_tags.h \
  /home/krieger/zephyrproject/zephyr/include/zephyr/linker/linker-defs.h \
  /home/krieger/zephyrproject/zephyr/include/zephyr/toolchain/common.h \
- /home/krieger/ws/iot_gateway/build/zephyr/include/generated/zephyr/offsets.h \
+ /home/krieger/ws/Bachelor/test2/build/zephyr/include/generated/zephyr/offsets.h \
  /home/krieger/zephyrproject/zephyr/include/zephyr/linker/linker-tool.h \
  /home/krieger/zephyrproject/zephyr/include/zephyr/linker/linker-tool-gcc.h \
  /home/krieger/zephyrproject/zephyr/include/zephyr/kernel/mm.h \
  /home/krieger/zephyrproject/zephyr/include/zephyr/kernel/internal/mm.h \
  /home/krieger/zephyrproject/zephyr/soc/espressif/esp32/memory.h \
  /home/krieger/zephyrproject/zephyr/include/zephyr/linker/rel-sections.ld \
- /home/krieger/ws/iot_gateway/build/zephyr/include/generated/snippets-rwdata.ld \
- /home/krieger/ws/iot_gateway/build/zephyr/include/generated/snippets-data-sections.ld \
+ /home/krieger/ws/Bachelor/test2/build/zephyr/include/generated/snippets-rwdata.ld \
+ /home/krieger/ws/Bachelor/test2/build/zephyr/include/generated/snippets-data-sections.ld \
  /home/krieger/zephyrproject/zephyr/include/zephyr/linker/common-ram.ld \
  /home/krieger/zephyrproject/zephyr/include/zephyr/linker/iterable_sections.h \
- /home/krieger/ws/iot_gateway/build/zephyr/include/generated/snippets-ram-sections.ld \
+ /home/krieger/ws/Bachelor/test2/build/zephyr/include/generated/snippets-ram-sections.ld \
  /home/krieger/zephyrproject/zephyr/include/zephyr/linker/cplusplus-ram.ld \
  /home/krieger/zephyrproject/zephyr/include/zephyr/linker/common-rom/common-rom-logging.ld \
  /home/krieger/zephyrproject/zephyr/include/zephyr/linker/ram-end.ld \
- /home/krieger/ws/iot_gateway/build/zephyr/include/generated/snippets-rodata.ld \
+ /home/krieger/ws/Bachelor/test2/build/zephyr/include/generated/snippets-rodata.ld \
  /home/krieger/zephyrproject/zephyr/include/zephyr/linker/cplusplus-rom.ld \
  /home/krieger/zephyrproject/zephyr/include/zephyr/linker/common-rom/common-rom-init.ld \
  /home/krieger/zephyrproject/zephyr/include/zephyr/linker/common-rom/common-rom-kernel-devices.ld \
@@ -58,6 +58,6 @@ linker_zephyr_pre0.cmd: \
  /home/krieger/zephyrproject/zephyr/include/zephyr/linker/common-rom/common-rom-debug.ld \
  /home/krieger/zephyrproject/zephyr/include/zephyr/linker/common-rom/common-rom-misc.ld \
  /home/krieger/zephyrproject/zephyr/include/zephyr/linker/thread-local-storage.ld \
- /home/krieger/ws/iot_gateway/build/zephyr/include/generated/snippets-sections.ld \
+ /home/krieger/ws/Bachelor/test2/build/zephyr/include/generated/snippets-sections.ld \
  /home/krieger/zephyrproject/zephyr/include/zephyr/linker/intlist.ld \
  /home/krieger/zephyrproject/zephyr/include/zephyr/linker/debug-sections.ld

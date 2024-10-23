@@ -39,71 +39,66 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/drivers/disk/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/drivers/disk/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/drivers/firmware/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/drivers/firmware/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/drivers/interrupt_controller/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/drivers/interrupt_controller/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/drivers/misc/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/drivers/misc/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/drivers/pcie/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/drivers/pcie/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/drivers/usb/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/drivers/usb/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/drivers/usb_c/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/drivers/usb_c/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/drivers/bluetooth/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/drivers/clock_control/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/drivers/clock_control/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/drivers/console/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/drivers/console/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/drivers/gpio/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/drivers/gpio/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/drivers/pinctrl/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/drivers/pinctrl/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/drivers/serial/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/drivers/serial/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/drivers/timer/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/drivers/timer/cmake_install.cmake")
 endif()
 

@@ -1,9 +1,9 @@
-/home/krieger/ws/iot_gateway/build/Kconfig/Kconfig.dts
-/home/krieger/ws/iot_gateway/build/Kconfig/Kconfig.modules
-/home/krieger/ws/iot_gateway/build/Kconfig/arch/Kconfig
-/home/krieger/ws/iot_gateway/build/Kconfig/soc/Kconfig
-/home/krieger/ws/iot_gateway/build/Kconfig/soc/Kconfig.defconfig
-/home/krieger/ws/iot_gateway/build/Kconfig/soc/Kconfig.soc
+/home/krieger/ws/Bachelor/test2/build/Kconfig/Kconfig.dts
+/home/krieger/ws/Bachelor/test2/build/Kconfig/Kconfig.modules
+/home/krieger/ws/Bachelor/test2/build/Kconfig/arch/Kconfig
+/home/krieger/ws/Bachelor/test2/build/Kconfig/soc/Kconfig
+/home/krieger/ws/Bachelor/test2/build/Kconfig/soc/Kconfig.defconfig
+/home/krieger/ws/Bachelor/test2/build/Kconfig/soc/Kconfig.soc
 /home/krieger/zephyr-sdk-0.16.8/cmake/zephyr/Kconfig
 /home/krieger/zephyrproject/modules/debug/percepio/DFM/kernelports/Zephyr/Kconfig
 /home/krieger/zephyrproject/modules/debug/percepio/DFM/kernelports/Zephyr/storageports/Filesystem/Kconfig

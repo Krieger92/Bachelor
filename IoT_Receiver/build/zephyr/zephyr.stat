@@ -8,66 +8,57 @@ ELF Header:
   Type:                              EXEC (Executable file)
   Machine:                           Tensilica Xtensa Processor
   Version:                           0x1
-  Entry point address:               0x4008e2e4
+  Entry point address:               0x40083a04
   Start of program headers:          52 (bytes into file)
-  Start of section headers:          3015320 (bytes into file)
+  Start of section headers:          1409644 (bytes into file)
   Flags:                             0x300
   Size of this header:               52 (bytes)
   Size of program headers:           32 (bytes)
   Number of program headers:         11
   Size of section headers:           40 (bytes)
-  Number of section headers:         47
-  Section header string table index: 46
+  Number of section headers:         38
+  Section header string table index: 37
 
 Section Headers:
   [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al
   [ 0]                   NULL            00000000 000000 000000 00      0   0  0
-  [ 1] .rtc.text         PROGBITS        400c0000 0552cc 000000 00   W  0   0  1
-  [ 2] .rtc.force_slow   PROGBITS        50000000 0552cc 000000 00   W  0   0  1
+  [ 1] .rtc.text         PROGBITS        400c0000 022f44 000000 00   W  0   0  1
+  [ 2] .rtc.force_slow   PROGBITS        50000000 022f44 000000 00   W  0   0  1
   [ 3] .iram0.vectors    PROGBITS        40080000 000194 000400 00  AX  0   0  4
-  [ 4] .iram0.text       PROGBITS        40080400 000594 012d24 00  AX  0   0  4
-  [ 5] .loader.text      PROGBITS        40093124 0132b8 000f9c 00  AX  0   0  4
-  [ 6] .iram0.text_end   NOBITS          400940c0 0154a4 000040 00  WA  0   0  1
-  [ 7] .iram0.data       PROGBITS        40094100 0552cc 000000 00   W  0   0  1
-  [ 8] .iram0.bss        PROGBITS        40094100 0552cc 000000 00   W  0   0  1
-  [ 9] .dram0.data       PROGBITS        3ffbdb60 014258 00124c 00  WA  0   0  8
-  [10] .loader.data      PROGBITS        3ffbedac 0154a4 000c98 00   A  0   0  4
-  [11] sw_isr_table      PROGBITS        3ffbfa44 01613c 000100 00  WA  0   0  4
-  [12] device_states     PROGBITS        3ffbfb44 01623c 00000a 00  WA  0   0  1
-  [13] k_mem_slab_area   PROGBITS        3ffbfb50 016248 000060 00  WA  0   0  4
-  [14] k_heap_area       PROGBITS        3ffbfbb0 0162a8 000018 00  WA  0   0  4
-  [15] k_mutex_area      PROGBITS        3ffbfbc8 0162c0 000014 00  WA  0   0  4
-  [16] k_sem_area        PROGBITS        3ffbfbdc 0162d4 000030 00  WA  0   0  4
-  [17] k_fifo_area       PROGBITS        3ffbfc0c 016304 00001c 00  WA  0   0  4
-  [18] net_buf_pool_area PROGBITS        3ffbfc28 016320 000150 00  WA  0   0  4
-  [19] .dram0.bss        NOBITS          3ffbfd78 016470 002878 00  WA  0   0  8
-  [20] .dram0.noinit     NOBITS          3ffc25f0 016470 003b98 00  WA  0   0 16
-  [21] .flash.rodat[...] NOBITS          000162d8 016470 009d28 00  WA  0   0  1
-  [22] .flash.rodata     PROGBITS        3f400000 020000 003360 00   A  0   0 65536
-  [23] .flash.rodata_end NOBITS          3f403474 023474 00cb8c 00  WA  0   0  1
-  [24] ctors             PROGBITS        3f403360 023360 00000c 00  WA  0   0  1
-  [25] init_array        PROGBITS        3f40336c 0552cc 000000 00   W  0   0  1
-  [26] initlevel         PROGBITS        3f40336c 02336c 000070 00   A  0   0  4
-  [27] device_area       PROGBITS        3f4033dc 0233dc 000064 00   A  0   0  4
-  [28] bt_l2cap_fix[...] PROGBITS        3f403440 023440 000024 00   A  0   0  4
-  [29] bt_gatt_serv[...] PROGBITS        3f403464 023464 000010 00   A  0   0  4
-  [30] .flash.text_dummy NOBITS          00023474 023474 00cb8c 00  WA  0   0  1
-  [31] .flash.text       PROGBITS        400d0000 030000 0252cc 00  AX  0   0 65536
-  [32] .comment          PROGBITS        00000000 0552cc 000094 01  MS  0   0  1
-  [33] .debug_aranges    PROGBITS        00000000 055360 004818 00      0   0  8
-  [34] .debug_info       PROGBITS        00000000 059b78 0f2f5d 00      0   0  1
-  [35] .debug_abbrev     PROGBITS        00000000 14cad5 01f809 00      0   0  1
-  [36] .debug_line       PROGBITS        00000000 16c2de 0a09d3 00      0   0  1
-  [37] .debug_frame      PROGBITS        00000000 20ccb4 00b480 00      0   0  4
-  [38] .debug_str        PROGBITS        00000000 218134 024855 01  MS  0   0  1
-  [39] .debug_loc        PROGBITS        00000000 23c989 051240 00      0   0  1
-  [40] .debug_ranges     PROGBITS        00000000 28dbd0 00bd70 00      0   0  8
-  [41] .xtensa.info      NOTE            00000000 299940 000038 00      0   0  1
-  [42] .xt.prop          PROGBITS        00000000 299978 025ddc 00      0   0  1
-  [43] .xt.lit           PROGBITS        00000000 2bf754 001830 00      0   0  1
-  [44] .symtab           SYMTAB          00000000 2c0f84 00e140 10     45 1161  4
-  [45] .strtab           STRTAB          00000000 2cf0c4 010f7c 00      0   0  1
-  [46] .shstrtab         STRTAB          00000000 2e0040 000258 00      0   0  1
+  [ 4] .iram0.text       PROGBITS        40080400 000594 007140 00  AX  0   0  4
+  [ 5] .loader.text      PROGBITS        40087540 0076d4 000c80 00  AX  0   0  4
+  [ 6] .iram0.text_end   NOBITS          400881c0 008eac 000040 00  WA  0   0  1
+  [ 7] .iram0.data       PROGBITS        40088200 022f44 000000 00   W  0   0  1
+  [ 8] .iram0.bss        PROGBITS        40088200 022f44 000000 00   W  0   0  1
+  [ 9] .dram0.data       PROGBITS        3ffb0000 008354 000b58 00  WA  0   0  4
+  [10] .loader.data      PROGBITS        3ffb0b58 008eac 000c98 00   A  0   0  4
+  [11] sw_isr_table      PROGBITS        3ffb17f0 009b44 000100 00  WA  0   0  4
+  [12] device_states     PROGBITS        3ffb18f0 009c44 000008 00  WA  0   0  1
+  [13] k_heap_area       PROGBITS        3ffb18f8 009c4c 000014 00  WA  0   0  4
+  [14] .dram0.bss        NOBITS          3ffb1910 009c60 0013b0 00  WA  0   0  8
+  [15] .dram0.noinit     NOBITS          3ffb2cc0 009c60 001400 00  WA  0   0 16
+  [16] .flash.rodat[...] NOBITS          00009acc 009c60 006534 00  WA  0   0  1
+  [17] .flash.rodata     PROGBITS        3f400000 010000 000bb0 00   A  0   0 65536
+  [18] .flash.rodata_end NOBITS          3f400c50 010c50 00f3b0 00  WA  0   0  1
+  [19] initlevel         PROGBITS        3f400bb0 010bb0 000050 00   A  0   0  4
+  [20] device_area       PROGBITS        3f400c00 010c00 000050 00   A  0   0  4
+  [21] .flash.text_dummy NOBITS          00010c50 010c50 00f3b0 00  WA  0   0  1
+  [22] .flash.text       PROGBITS        400d0000 020000 002f44 00  AX  0   0 65536
+  [23] .comment          PROGBITS        00000000 022f44 000020 01  MS  0   0  1
+  [24] .debug_aranges    PROGBITS        00000000 022f68 002180 00      0   0  8
+  [25] .debug_info       PROGBITS        00000000 0250e8 0793c2 00      0   0  1
+  [26] .debug_abbrev     PROGBITS        00000000 09e4aa 012a42 00      0   0  1
+  [27] .debug_line       PROGBITS        00000000 0b0eec 050ef2 00      0   0  1
+  [28] .debug_frame      PROGBITS        00000000 101de0 004ba8 00      0   0  4
+  [29] .debug_str        PROGBITS        00000000 106988 0146ff 01  MS  0   0  1
+  [30] .debug_loc        PROGBITS        00000000 11b087 0204bc 00      0   0  1
+  [31] .debug_ranges     PROGBITS        00000000 13b548 004bf8 00      0   0  8
+  [32] .xtensa.info      NOTE            00000000 140140 000038 00      0   0  1
+  [33] .xt.prop          PROGBITS        00000000 140178 0098ac 00      0   0  1
+  [34] .xt.lit           PROGBITS        00000000 149a24 0005d0 00      0   0  1
+  [35] .symtab           SYMTAB          00000000 149ff4 006480 10     36 456  4
+  [36] .strtab           STRTAB          00000000 150474 007c26 00      0   0  1
+  [37] .shstrtab         STRTAB          00000000 15809a 0001d2 00      0   0  1
 Key to Flags:
   W (write), A (alloc), X (execute), M (merge), S (strings), I (info),
   L (link order), O (extra OS processing required), G (group), T (TLS),
@@ -76,28 +67,28 @@ Key to Flags:
 
 Program Headers:
   Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align
-  LOAD           0x000194 0x40080000 0x00000000 0x140c0 0x140c0 R E 0x4
-  LOAD           0x014258 0x3ffbdb60 0x000140c0 0x0124c 0x0124c RW  0x8
-  LOAD           0x000000 0x400940c0 0x000140c0 0x00000 0x00040 RW  0x1
-  LOAD           0x0154a4 0x3ffbedac 0x0001530c 0x00fcc 0x00fcc RW  0x4
-  LOAD           0x000000 0x000162d8 0x000162d8 0x00000 0x09d28 RW  0x1
-  LOAD           0x000000 0x3ffbfd78 0x000162d8 0x00000 0x02878 RW  0x8
-  LOAD           0x000000 0x3ffc25f0 0x000162d8 0x00000 0x03b98 RW  0x10
-  LOAD           0x020000 0x3f400000 0x00020000 0x03474 0x03474 RW  0x10000
-  LOAD           0x000000 0x00023474 0x00023474 0x00000 0x0cb8c RW  0x1
-  LOAD           0x000000 0x3f403474 0x00023474 0x00000 0x0cb8c RW  0x1
-  LOAD           0x030000 0x400d0000 0x00030000 0x252cc 0x252cc R E 0x10000
+  LOAD           0x000194 0x40080000 0x00000000 0x081c0 0x081c0 R E 0x4
+  LOAD           0x008354 0x3ffb0000 0x000081c0 0x00b58 0x00b58 RW  0x4
+  LOAD           0x000000 0x400881c0 0x000081c0 0x00000 0x00040 RW  0x1
+  LOAD           0x008eac 0x3ffb0b58 0x00008d18 0x00db4 0x00db4 RW  0x4
+  LOAD           0x000000 0x00009acc 0x00009acc 0x00000 0x06534 RW  0x1
+  LOAD           0x000000 0x3ffb1910 0x00009acc 0x00000 0x013b0 RW  0x8
+  LOAD           0x000000 0x3ffb2cc0 0x00009acc 0x00000 0x01400 RW  0x10
+  LOAD           0x010000 0x3f400000 0x00010000 0x00c50 0x00c50 R   0x10000
+  LOAD           0x000000 0x00010c50 0x00010c50 0x00000 0x0f3b0 RW  0x1
+  LOAD           0x000000 0x3f400c50 0x00010c50 0x00000 0x0f3b0 RW  0x1
+  LOAD           0x020000 0x400d0000 0x00020000 0x02f44 0x02f44 R E 0x10000
 
  Section to Segment mapping:
   Segment Sections...
    00     .iram0.vectors .iram0.text .loader.text 
    01     .dram0.data 
    02     .iram0.text_end 
-   03     .loader.data sw_isr_table device_states k_mem_slab_area k_heap_area k_mutex_area k_sem_area k_fifo_area net_buf_pool_area 
+   03     .loader.data sw_isr_table device_states k_heap_area 
    04     .flash.rodata_dummy 
    05     .dram0.bss 
    06     .dram0.noinit 
-   07     .flash.rodata ctors initlevel device_area bt_l2cap_fixed_chan_area bt_gatt_service_static_area 
+   07     .flash.rodata initlevel device_area 
    08     .flash.text_dummy 
    09     .flash.rodata_end 
    10     .flash.text 

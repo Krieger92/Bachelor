@@ -1,7 +1,7 @@
 cmake:
   application:
-    configuration-dir: /home/krieger/ws/iot_gateway
-    source-dir: /home/krieger/ws/iot_gateway
+    configuration-dir: /home/krieger/ws/Bachelor/test2
+    source-dir: /home/krieger/ws/Bachelor/test2
   board:
     name: esp_wrover_kit
     qualifiers: esp32/procpu
@@ -34,9 +34,9 @@ cmake:
   kconfig:
     files:
      - /home/krieger/zephyrproject/zephyr/boards/espressif/esp_wrover_kit/esp_wrover_kit_procpu_defconfig
-     - /home/krieger/ws/iot_gateway/prj.conf
+     - /home/krieger/ws/Bachelor/test2/prj.conf
     user-files:
-     - /home/krieger/ws/iot_gateway/prj.conf
+     - /home/krieger/ws/Bachelor/test2/prj.conf
   toolchain:
     name: zephyr
     path: /home/krieger/zephyr-sdk-0.16.8

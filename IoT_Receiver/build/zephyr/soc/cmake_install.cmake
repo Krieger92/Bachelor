@@ -39,11 +39,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/soc/common/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/soc/common/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/soc/soc/esp32/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/soc/soc/esp32/cmake_install.cmake")
 endif()
 

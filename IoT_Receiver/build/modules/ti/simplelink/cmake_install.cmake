@@ -39,6 +39,6 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/modules/ti/simplelink/source/ti/devices/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/modules/ti/simplelink/source/ti/devices/cmake_install.cmake")
 endif()
 

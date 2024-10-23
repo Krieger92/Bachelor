@@ -39,51 +39,41 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/lib/crc/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/lib/crc/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/lib/libc/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/lib/libc/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/lib/posix/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/lib/posix/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/lib/cpp/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/lib/hash/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/lib/hash/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/lib/heap/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/lib/heap/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/lib/mem_blocks/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/lib/mem_blocks/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/lib/os/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/lib/net_buf/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/lib/os/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/home/krieger/ws/iot_gateway/build/zephyr/lib/utils/cmake_install.cmake")
+  include("/home/krieger/ws/Bachelor/test2/build/zephyr/lib/utils/cmake_install.cmake")
 endif()
 
