@@ -1,48 +1,65 @@
-/*
- * Copyright (c) 2016 Intel Corporation
- *
- * SPDX-License-Identifier: Apache-2.0
- */
-
 #include <stdio.h>
-#include <zephyr/kernel.h>
-#include <zephyr/drivers/gpio.h>
+#include <zephyr/types.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <zephyr/sys/printk.h>
+#include <zephyr/sys/util.h>
+#include <zephyr/bluetooth/bluetooth.h>
+#include <zephyr/bluetooth/hci.h>
 
-/* 1000 msec = 1 sec */
-#define SLEEP_TIME_MS   10000
 
-/* The devicetree node identifier for the "led0" alias. */
-#define LED0_NODE DT_ALIAS(led0)
 
-/*
- * A build error on this line means your board is unsupported.
- * See the sample documentation for information on how to fix this.
- */
-static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED0_NODE, gpios);
+bt_addr_le_t macAdresseGeneric, macAdresses[10];
+int err;
+uint8_t seqIDs [10]={0};
 
-int main(void)
+const struct bt_le_scan_param scan_param = BT_LE_SCAN_PARAM_INIT(BT_LE_SCAN_TYPE_PASSIVE, BT_LE_SCAN_OPT_FILTER_DUPLICATE, BT_GAP_SCAN_FAST_INTERVAL, BT_GAP_SCAN_FAST_WINDOW);
+const struct bt_le_scan_param scan_paramRunning = BT_LE_SCAN_PARAM_INIT(BT_LE_SCAN_TYPE_PASSIVE, BT_LE_SCAN_OPT_FILTER_ACCEPT_LIST, BT_GAP_SCAN_FAST_INTERVAL, BT_GAP_SCAN_FAST_WINDOW);
+
+
+
+
+typedef struct 
 {
-	int ret;
-	bool led_state = true;
+  uint8_t noIdea[5];
+  uint16_t companyID;
+  uint8_t frameType;
+  uint8_t config[3];
+  uint8_t seqID;
+  uint16_t counter;
+  uint16_t batteryLvl;
+  uint16_t x_freq;
+  uint16_t x_vel;
+  uint16_t y_freq;
+  uint16_t y_vel;
+  uint16_t z_freq;
+  uint16_t z_vel;
+}__attribute__((packed)) makeen_data;
 
-	if (!gpio_is_ready_dt(&led)) {
-		return 0;
-	}
 
-	ret = gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE);
-	if (ret < 0) {
-		return 0;
-	}
 
-	while (1) {
-		ret = gpio_pin_toggle_dt(&led);
-		if (ret < 0) {
-			return 0;
-		}
+static void scan_cb(const bt_addr_le_t *addr, int8_t rssi, uint8_t adv_type, struct net_buf_simple *buf)
+{
+  char addr_str[BT_ADDR_LE_STR_LEN];
+  bt_addr_le_to_str(addr, addr_str, sizeof(addr_str));
 
-		led_state = !led_state;
-		printf("LED state: %s\n", led_state ? "ON" : "OFF");
-		k_msleep(SLEEP_TIME_MS);
-	}
-	return 0;
+  uint8_t * pData=(uint8_t*) buf->data;
+  makeen_data *mdata=(makeen_data*) pData;
+  mdata->companyID = mdata->companyID>>8 | mdata->companyID<<8; // flip bytes in companyID
+  mdata->batteryLvl = mdata->batteryLvl>>8 | mdata->batteryLvl<<8; // flip bytes in batteryLvl
+
+
+  
+  
+   
+  
 }
+
+
+
+
+int main(void) {
+
+}
+
+
