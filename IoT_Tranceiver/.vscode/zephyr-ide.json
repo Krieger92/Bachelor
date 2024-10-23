@@ -1,0 +1,31 @@
+{
+  "projects": {
+    "IoT_Tranceiver": {
+      "rel_path": "",
+      "name": "IoT_Tranceiver",
+      "buildConfigs": {
+        "build/esp_wrover_kit/esp32/procpu": {
+          "relBoardDir": "../../../zephyrproject/zephyr/boards",
+          "board": "esp_wrover_kit/esp32/procpu",
+          "relBoardSubDir": "/home/krieger/zephyrproject/zephyr/boards/espressif/esp_wrover_kit",
+          "name": "build/esp_wrover_kit/esp32/procpu",
+          "westBuildArgs": "",
+          "westBuildCMakeArgs": "",
+          "confFiles": {
+            "config": [],
+            "extraConfig": [],
+            "overlay": [],
+            "extraOverlay": []
+          },
+          "runnerConfigs": {}
+        }
+      },
+      "confFiles": {
+        "config": [],
+        "extraConfig": [],
+        "overlay": [],
+        "extraOverlay": []
+      }
+    }
+  }
+}
