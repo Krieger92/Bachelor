@@ -17,7 +17,13 @@
             "overlay": [],
             "extraOverlay": []
           },
-          "runnerConfigs": {}
+          "runnerConfigs": {
+            "esp32": {
+              "runner": "esp32",
+              "name": "esp32",
+              "args": ""
+            }
+          }
         }
       },
       "confFiles": {

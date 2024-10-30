@@ -1,4 +1,0 @@
-west:
-  command: /home/krieger/zephyrproject/.venv/bin/west build -p always -b esp_wrover_kit
-  topdir: /home/krieger/zephyrproject
-  version: 1.2.0

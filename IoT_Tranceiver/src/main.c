@@ -43,22 +43,68 @@ static void scan_cb(const bt_addr_le_t *addr, int8_t rssi, uint8_t adv_type, str
   char addr_str[BT_ADDR_LE_STR_LEN];
   bt_addr_le_to_str(addr, addr_str, sizeof(addr_str));
 
-
-
-
+  
   uint8_t * pData=(uint8_t*) buf->data;
   makeen_data *mdata=(makeen_data*) pData;
   mdata->companyID = mdata->companyID>>8 | mdata->companyID<<8; // flip bytes in companyID
   mdata->batteryLvl = mdata->batteryLvl>>8 | mdata->batteryLvl<<8; // flip bytes in batteryLvl
 
+  //print the mac address and the rssi
+  printk("MAC: %s    RSSI: %d\n", addr_str, rssi);
+
 
 }
 
 
+void bt_ready_cb(int err)
+{
+  printk("Bluetooth CB Initialized\n");
+}
 
 
 int main(void) {
-	
+
+  printk("Starting Scanner\n");
+
+  err = bt_enable(bt_ready_cb);
+  
+#if 0
+  while (err < 0) 
+  {   printk("Bluetooth init failed (err %d)\n", err);
+    k_sleep(K_SECONDS(10));
+    if (bt_is_ready()) {
+    printk("Bluetooth initialized\n");
+  } else {
+    printk("Bluetooth not initialized - trying bt_enable\n");
+  }
+    err = bt_enable(NULL);
+
+
+    if (bt_is_ready()) {
+      printk("Bluetooth initialized\n");
+    }
+    
+    
+  }
+#endif
+  err = bt_le_scan_start(&scan_param, scan_cb);
+   if (err) {
+    printk("Bluetooth init failed (err %d)\n", err);
+    return 0;
+  }
+  printk("Bluetooth initialized\n");
+
+
+  while(1) {
+
+    if (!bt_is_ready()) {
+      printk("Bluetooth not initialized - trying bt_enable\n");
+    }
+
+    printk("Scanning...\n");
+    
+    k_sleep(K_SECONDS(5));
+  }
 
 }
 

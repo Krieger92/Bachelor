@@ -5,6 +5,8 @@
     "C_Cpp.default.compileCommands": "${workspaceFolder}/.vscode/compile_commands.json",
     "cmake.configureOnOpen": false,
     "files.associations": {
-        "bluetooth.h": "c"
+        "bluetooth.h": "c",
+        "hci.h": "c",
+        "cstdlib": "c"
     }
 }
