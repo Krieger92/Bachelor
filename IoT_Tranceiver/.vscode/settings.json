@@ -7,6 +7,8 @@
     "files.associations": {
         "bluetooth.h": "c",
         "hci.h": "c",
-        "cstdlib": "c"
+        "cstdlib": "c",
+        "spsc_pbuf.h": "c",
+        "spsc_lockfree.h": "c"
     }
 }

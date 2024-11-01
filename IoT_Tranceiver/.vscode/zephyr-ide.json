@@ -7,7 +7,7 @@
         "build/esp_wrover_kit/esp32/procpu": {
           "relBoardDir": "../../../zephyrproject/zephyr/boards",
           "board": "esp_wrover_kit/esp32/procpu",
-          "relBoardSubDir": "/home/krieger/zephyrproject/zephyr/boards/espressif/esp_wrover_kit",
+          "relBoardSubDir": "/home/krieger/zephyrproject/zephyr/boards/espressif/esp_wrover_kit/esp32/procpu",
           "name": "build/esp_wrover_kit/esp32/procpu",
           "westBuildArgs": "",
           "westBuildCMakeArgs": "",
