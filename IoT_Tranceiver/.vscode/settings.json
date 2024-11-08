@@ -9,6 +9,18 @@
         "hci.h": "c",
         "cstdlib": "c",
         "spsc_pbuf.h": "c",
-        "spsc_lockfree.h": "c"
+        "spsc_lockfree.h": "c",
+        "flash.h": "c",
+        "types.h": "c",
+        "array": "c",
+        "string": "c",
+        "string_view": "c",
+        "device.h": "c",
+        "devicetree.h": "c",
+        "sntp.h": "c",
+        "cellular.h": "c",
+        "socket.h": "c",
+        "net_ip.h": "c",
+        "socket_select.h": "c"
     }
 }

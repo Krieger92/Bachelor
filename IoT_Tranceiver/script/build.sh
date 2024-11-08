@@ -7,3 +7,5 @@ source ~/zephyrproject/.venv/bin/activate
 source ~/zephyrproject/zephyr/zephyr-env.sh
 
 west build -p always -b esp_wrover_kit/esp32/procpu
+
+# west build -p always -b esp_wrover_kit/esp32/procpu -- -DDTC_OVERLAY_FILE=modem_overlay.overlay
