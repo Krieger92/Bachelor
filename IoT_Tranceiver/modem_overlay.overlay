@@ -32,7 +32,7 @@
     pinctrl-names = "default";
 
     current-speed = <115200>;
-    hw-flow-control;
+    /*hw-flow-control;*/
     status = "okay";
 
     modem: modem {

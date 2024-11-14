@@ -18,7 +18,7 @@
 #include <zephyr/drivers/cellular.h>
 
 
-#define SAMPLE_TEST_ENDPOINT_HOSTNAME		("time.google.com")
+#define SNTP_SERVER		("216.239.35.4") // Google's public NTP server time.google.com
 // #define SAMPLE_TEST_ENDPOINT_UDP_ECHO_PORT	(7780)
 // #define SAMPLE_TEST_ENDPOINT_UDP_RECEIVE_PORT	(7781)
 // #define SAMPLE_TEST_PACKET_SIZE			(1024)
@@ -29,6 +29,7 @@
 int err, ret;
 const struct device *modem = DEVICE_DT_GET(DT_ALIAS(modem));
 struct sntp_time ts;
+struct sockaddr_in sntp_server;
 // const struct device *flash_dev = device_get_binding(DT_CHOSEN_ZEPHYR_FLASH_CONTROLLER_LABEL);
 
 const struct bt_le_scan_param scan_param = BT_LE_SCAN_PARAM_INIT(BT_LE_SCAN_TYPE_PASSIVE, BT_LE_SCAN_OPT_FILTER_DUPLICATE, BT_GAP_SCAN_FAST_INTERVAL, BT_GAP_SCAN_FAST_WINDOW);
@@ -123,13 +124,31 @@ void timestamp_task(void)
 {
   printk("Timestamping task started\n");
   //Connect to LTE
-  pm_device_action_run(modem, PM_DEVICE_ACTION_RESUME);
+  pm_device_action_run(modem, PM_DEVICE_ACTION_RESUME); //Turn on modem
+
 
   
 
   while (1)
   {
-    ret = sntp_simple(SAMPLE_TEST_ENDPOINT_HOSTNAME, 5000, &ts);
+    sntp_server.sin_family = AF_INET;
+    sntp_server.sin_port = htons(123);
+    ret = net_addr_pton(AF_INET, SNTP_SERVER, &sntp_server.sin_addr);
+    if (ret < 0) {
+      printk("Invalid address: %d\n", ret);
+      // printk(sntp_server.sin_addr);
+      printk("\n");
+    }
+    // ret = sntp_simple(SNTP_SERVER, 5000, &ts);
+
+    ret = sntp_init(NULL, (struct sockaddr *)&sntp_server, sizeof(sntp_server));
+    if (ret < 0) {
+      printk("SNTP init failed: %d\n", ret);
+    } else {
+      printk("SNTP init succeeded\n");
+    }
+  
+
   k_sleep(K_SECONDS(1));
   if (ret < 0) {
     printk("SNTP query failed: %d\n", ret);
@@ -169,8 +188,6 @@ void timestamp_task(void)
     // }
   }
 }
-
-
 
 
 void decipher_task(void)
