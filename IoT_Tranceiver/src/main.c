@@ -16,19 +16,17 @@
 #include <zephyr/net/socket.h>
 #include <zephyr/net/sntp.h>
 #include <zephyr/drivers/cellular.h>
+#include <zephyr/net/net_if.h>
+#include <time.h>
 
 
 #define SNTP_SERVER		("216.239.35.4") // Google's public NTP server time.google.com
-// #define SAMPLE_TEST_ENDPOINT_UDP_ECHO_PORT	(7780)
-// #define SAMPLE_TEST_ENDPOINT_UDP_RECEIVE_PORT	(7781)
-// #define SAMPLE_TEST_PACKET_SIZE			(1024)
-// #define SAMPLE_TEST_ECHO_PACKETS		(16)
-// #define SAMPLE_TEST_TRANSMIT_PACKETS		(128)
 
 
 int err, ret;
 const struct device *modem = DEVICE_DT_GET(DT_ALIAS(modem));
 struct sntp_time ts;
+struct tm *tm_info;
 struct sockaddr_in sntp_server;
 // const struct device *flash_dev = device_get_binding(DT_CHOSEN_ZEPHYR_FLASH_CONTROLLER_LABEL);
 
@@ -67,9 +65,61 @@ typedef struct
 }__attribute__((packed)) makeen_data_filtered;
 
 
-SPSC_DEFINE(spscBuf1, makeen_data_ADC, 16);
-SPSC_DEFINE(spscBuf2, makeen_data_filtered, 16);
+SPSC_DEFINE(spscBuf1, makeen_data_ADC, 32);
+SPSC_DEFINE(spscBuf2, makeen_data_filtered, 32);
 
+
+static void print_cellular_info(void)
+{
+	int rc;
+	int16_t rssi;
+	char buffer[64];
+
+	rc = cellular_get_signal(modem, CELLULAR_SIGNAL_RSSI, &rssi);
+	if (!rc) {
+		printk("RSSI %d\n", rssi);
+	}
+
+	rc = cellular_get_modem_info(modem, CELLULAR_MODEM_INFO_IMEI, &buffer[0], sizeof(buffer));
+	if (!rc) {
+		printk("IMEI: %s\n", buffer);
+	}
+	rc = cellular_get_modem_info(modem, CELLULAR_MODEM_INFO_MODEL_ID, &buffer[0],
+				     sizeof(buffer));
+	if (!rc) {
+		printk("MODEL_ID: %s\n", buffer);
+	}
+	rc = cellular_get_modem_info(modem, CELLULAR_MODEM_INFO_MANUFACTURER, &buffer[0],
+				     sizeof(buffer));
+	if (!rc) {
+		printk("MANUFACTURER: %s\n", buffer);
+	}
+	rc = cellular_get_modem_info(modem, CELLULAR_MODEM_INFO_SIM_IMSI, &buffer[0],
+				     sizeof(buffer));
+	if (!rc) {
+		printk("SIM_IMSI: %s\n", buffer);
+	}
+	rc = cellular_get_modem_info(modem, CELLULAR_MODEM_INFO_SIM_ICCID, &buffer[0],
+				     sizeof(buffer));
+	if (!rc) {
+		printk("SIM_ICCID: %s\n", buffer);
+	}
+	rc = cellular_get_modem_info(modem, CELLULAR_MODEM_INFO_FW_VERSION, &buffer[0],
+				     sizeof(buffer));
+	if (!rc) {
+		printk("FW_VERSION: %s\n", buffer);
+	}
+}
+
+void unix_to_datetime(time_t unix_time, char *buffer, size_t buffer_size) {
+    struct tm *tm_info;
+
+    // Convert Unix time to tm structure
+    tm_info = gmtime(&unix_time);
+
+    // Format the tm structure into a human-readable string
+    strftime(buffer, buffer_size, "%Y-%m-%d %H:%M:%S", tm_info);
+}
 
 
 static void scan_cb(const bt_addr_le_t *addr, int8_t rssi, uint8_t adv_type, struct net_buf_simple *buf)
@@ -112,6 +162,54 @@ void bt_rec_task(void)
         printk("Bluetooth scan_start failed (err %d)\n", err);
       }
     } 
+    do
+    {
+      //Connect to LTE
+      pm_device_action_run(modem, PM_DEVICE_ACTION_RESUME); //Turn on modem
+
+      struct net_if *const iface = net_if_get_first_by_type(&NET_L2_GET_NAME(PPP));
+      int ret;
+
+
+      printk("Powering on modem\n");
+      pm_device_action_run(modem, PM_DEVICE_ACTION_RESUME);
+
+      printk("Bring up network interface\n");
+      ret = net_if_up(iface);
+      if (ret < 0) {
+        printk("Failed to bring up network interface\n");
+        return;
+      }
+
+      printk("Waiting for L4 connected\n");
+      ret = net_mgmt_event_wait_on_iface(iface, NET_EVENT_L4_CONNECTED, NULL, NULL, NULL,
+                K_SECONDS(120));
+
+      if (ret != 0) {
+        printk("L4 was not connected in time\n");
+        return;
+      }
+
+      printk("Waiting for DNS server added\n");
+      ret = net_mgmt_event_wait_on_iface(iface, NET_EVENT_DNS_SERVER_ADD, NULL, NULL, NULL,
+                K_SECONDS(20));
+      if (ret) {
+        printk("DNS server was not added in time\n");
+        return;
+      }
+
+      printk("Retrieving cellular info\n");
+      print_cellular_info();
+
+      sntp_server.sin_family = AF_INET;
+      sntp_server.sin_port = htons(123);
+      ret = net_addr_pton(AF_INET, SNTP_SERVER, &sntp_server.sin_addr);
+      if (ret < 0) {
+        printk("Invalid address: %d\n", ret);
+        printk("\n");
+      }
+    } while (ret != 0);
+    
     if (bt_is_ready()) {
       printk("Bluetooth initialized - killing thread\n");
       k_thread_abort(k_current_get());
@@ -123,69 +221,99 @@ void bt_rec_task(void)
 void timestamp_task(void)
 {
   printk("Timestamping task started\n");
-  //Connect to LTE
-  pm_device_action_run(modem, PM_DEVICE_ACTION_RESUME); //Turn on modem
+  // //Connect to LTE
+  // pm_device_action_run(modem, PM_DEVICE_ACTION_RESUME); //Turn on modem
+
+  // struct net_if *const iface = net_if_get_first_by_type(&NET_L2_GET_NAME(PPP));
+	// int ret;
 
 
+	// printk("Powering on modem\n");
+	// pm_device_action_run(modem, PM_DEVICE_ACTION_RESUME);
+
+	// printk("Bring up network interface\n");
+	// ret = net_if_up(iface);
+	// if (ret < 0) {
+	// 	printk("Failed to bring up network interface\n");
+	// 	return;
+	// }
+
+	// printk("Waiting for L4 connected\n");
+	// ret = net_mgmt_event_wait_on_iface(iface, NET_EVENT_L4_CONNECTED, NULL, NULL, NULL,
+	// 				   K_SECONDS(120));
+
+	// if (ret != 0) {
+	// 	printk("L4 was not connected in time\n");
+	// 	return;
+	// }
+
+	// printk("Waiting for DNS server added\n");
+	// ret = net_mgmt_event_wait_on_iface(iface, NET_EVENT_DNS_SERVER_ADD, NULL, NULL, NULL,
+	// 				   K_SECONDS(20));
+	// if (ret) {
+	// 	printk("DNS server was not added in time\n");
+	// 	return;
+	// }
+
+	// printk("Retrieving cellular info\n");
+	// print_cellular_info();
+
+
+  // sntp_server.sin_family = AF_INET;
+  // sntp_server.sin_port = htons(123);
+  // ret = net_addr_pton(AF_INET, SNTP_SERVER, &sntp_server.sin_addr);
+  // if (ret < 0) {
+  //   printk("Invalid address: %d\n", ret);
+  //   printk("\n");
+  // }
+   
   
 
   while (1)
   {
-    sntp_server.sin_family = AF_INET;
-    sntp_server.sin_port = htons(123);
-    ret = net_addr_pton(AF_INET, SNTP_SERVER, &sntp_server.sin_addr);
+    ret = sntp_simple(SNTP_SERVER, 5000, &ts);
     if (ret < 0) {
-      printk("Invalid address: %d\n", ret);
-      // printk(sntp_server.sin_addr);
-      printk("\n");
-    }
-    // ret = sntp_simple(SNTP_SERVER, 5000, &ts);
-
-    ret = sntp_init(NULL, (struct sockaddr *)&sntp_server, sizeof(sntp_server));
-    if (ret < 0) {
-      printk("SNTP init failed: %d\n", ret);
-    } else {
-      printk("SNTP init succeeded\n");
-    }
+      printk("SNTP query failed: %d\n", ret);
+    } 
+    // else {
+    //   printk("Timestamp: %llu\n", ts.seconds);
+    //   char buffer[20];
+    //   unix_to_datetime(ts.seconds, buffer, sizeof(buffer));
+    //   printk("HR Timestamp: %s\n", buffer);
+    // }
   
 
   k_sleep(K_SECONDS(1));
-  if (ret < 0) {
-    printk("SNTP query failed: %d\n", ret);
-  } else {
-    printk("SNTP query succeeded\n");
-    printk("Timestamp: %u.%06u\n", ts.seconds, ts.fraction);
-  }
-    // if (spsc_consumable(&spscBuf1))
-    // {
-    //   makeen_data_ADC * dataptr = spsc_consume(&spscBuf1);
-    //   if (dataptr != NULL)
-    //   {
-    //     makeen_data_filtered *tmpStruct = k_malloc(sizeof(makeen_data_filtered));
-    //     tmpStruct->seqID = dataptr->seqID;
-    //     tmpStruct->runtimeCounter = dataptr->counter;
-    //     tmpStruct->batteryLvl = dataptr->batteryLvl;
-    //     tmpStruct->adc_val1 = dataptr->adc_val1;
-    //     tmpStruct->adc_val2 = dataptr->adc_val2;
-    //     tmpStruct->addr = dataptr->addr;
-    //     tmpStruct->rssi = dataptr->rssi;
+  
+    if (spsc_consumable(&spscBuf1))
+    {
+      makeen_data_ADC * dataptr = spsc_consume(&spscBuf1);
+      if (dataptr != NULL)
+      {
+        makeen_data_filtered *tmpStruct = k_malloc(sizeof(makeen_data_filtered));
+        tmpStruct->seqID = dataptr->seqID;
+        tmpStruct->runtimeCounter = dataptr->counter;
+        tmpStruct->batteryLvl = dataptr->batteryLvl;
+        tmpStruct->adc_val1 = dataptr->adc_val1;
+        tmpStruct->adc_val2 = dataptr->adc_val2;
+        tmpStruct->addr = dataptr->addr;
+        tmpStruct->rssi = dataptr->rssi;
+        tmpStruct->timestamp = ts.seconds;
 
-    //     tmpStruct->timestamp = k_uptime_get_32();
+        spsc_release(&spscBuf1);
 
-    //     spsc_release(&spscBuf1);
-
-    //     makeen_data_filtered * empty_spot_pointer = spsc_acquire(&spscBuf2);
-    //     if (empty_spot_pointer != NULL)
-    //     {
-    //       memcpy(empty_spot_pointer, tmpStruct, sizeof(makeen_data_filtered));
-    //       spsc_produce(&spscBuf2);      
-    //     } else {
-    //       printk("No space in spscBuf2\n");
-    //     } 
-    //   }
-    // } else {
-    //   k_yield();
-    // }
+        makeen_data_filtered * empty_spot_pointer = spsc_acquire(&spscBuf2);
+        if (empty_spot_pointer != NULL)
+        {
+          memcpy(empty_spot_pointer, tmpStruct, sizeof(makeen_data_filtered));
+          spsc_produce(&spscBuf2);      
+        } else {
+          printk("No space in spscBuf2\n");
+        } 
+      }
+    } else {
+      k_yield();
+    }
   }
 }
 
@@ -214,7 +342,9 @@ void decipher_task(void)
         spsc_release(&spscBuf2);
       }
     } else {
-      k_yield();
+      // k_yield();
+      k_sleep(K_MSEC(250));
+      printk("No data in spscBuf2\n");
     }
   }
 }
@@ -232,9 +362,15 @@ void MQTT_task(void)
   }
 }
 
-#define STACKSIZE 1024
+#define STACKSIZE 2048
 #define PRIORITY 7
-K_THREAD_DEFINE(bluetooth_task_id, STACKSIZE*2, bt_rec_task, NULL, NULL, NULL, 7, 0, 0);
-K_THREAD_DEFINE(timestamp_task_id, STACKSIZE*2, timestamp_task, NULL, NULL, NULL, 7, 0, 0);
-K_THREAD_DEFINE(decipher_task_id, STACKSIZE, decipher_task, NULL, NULL, NULL, 7, 0, 0);
+K_THREAD_DEFINE(bluetooth_task_id, STACKSIZE, bt_rec_task, NULL, NULL, NULL, K_PRIO_PREEMPT(7), 0, 0);
+K_THREAD_DEFINE(timestamp_task_id, STACKSIZE, timestamp_task, NULL, NULL, NULL, K_PRIO_PREEMPT(7), 0, 0);
+K_THREAD_DEFINE(decipher_task_id, STACKSIZE, decipher_task, NULL, NULL, NULL, K_PRIO_PREEMPT(7), 0, 0);
 // K_THREAD_DEFINE(MQTT_task_id, STACKSIZE, MQTT_task, NULL, NULL, NULL, 7, 0, 0);
+
+
+
+
+
+

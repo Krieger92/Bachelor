@@ -8,4 +8,4 @@ source ~/zephyrproject/zephyr/zephyr-env.sh
 
 # west build -p always -b esp_wrover_kit/esp32/procpu
 
-west build -p always -b esp_wrover_kit/esp32/procpu -- -DEXTRA_DTC_OVERLAY_FILE=modem_overlay.overlay
+west build -p always -b esp_wrover_kit/esp32/procpu

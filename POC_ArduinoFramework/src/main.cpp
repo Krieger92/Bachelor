@@ -15,10 +15,10 @@
 #define TINY_GSM_POWERDOWN    true
 
 // set GSM PIN, if any
-#define GSM_PIN "1234"
+#define GSM_PIN ""
 
 // Your GPRS credentials, if any
-const char apn[]  = "telenor";     //SET TO YOUR APN
+const char apn[]  = "telenor.iot";     //SET TO YOUR APN
 const char gprsUser[] = "";
 const char gprsPass[] = "";
 

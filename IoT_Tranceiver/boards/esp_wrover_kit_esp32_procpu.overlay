@@ -1,0 +1,44 @@
+/ {
+    label_a: node_a { /* empty. */};
+    node_refs {
+        phandle-by-path = <&{/node_a}>;
+        phandle-by-label = <&label_a>;
+    };
+};
+
+&pinctrl {
+    uart2_default: uart2_default {
+        group1 {
+            pinmux = <UART2_TX_GPIO19>;
+            output-high;
+        };
+        group2 {
+            pinmux = <UART2_RX_GPIO18>; 
+            output-high;
+        };
+    };
+
+};
+
+/ {
+    aliases {
+        modem = &modem;
+    };
+};
+
+&uart2 {
+    pinctrl-0 = <&uart2_default>;
+    
+    pinctrl-names = "default";
+
+    current-speed = <115200>;
+    /*hw-flow-control;*/
+    status = "okay";
+
+    modem: modem {
+        compatible = "simcom,sim7080";
+        mdm-power-gpios = <&gpio0 5 GPIO_ACTIVE_HIGH>;
+        
+        status = "okay";
+    };
+};

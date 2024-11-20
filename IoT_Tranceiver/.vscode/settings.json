@@ -21,6 +21,7 @@
         "cellular.h": "c",
         "socket.h": "c",
         "net_ip.h": "c",
-        "socket_select.h": "c"
+        "socket_select.h": "c",
+        "compare": "c"
     }
 }
