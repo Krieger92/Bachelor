@@ -22,6 +22,8 @@
         "socket.h": "c",
         "net_ip.h": "c",
         "socket_select.h": "c",
-        "compare": "c"
+        "compare": "c",
+        "mqtt.h": "c",
+        "net_sample_common.h": "c"
     }
 }
