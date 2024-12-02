@@ -1,9 +1,8 @@
 / {
-    label_a: node_a { /* empty. */};
-    node_refs {
-        phandle-by-path = <&{/node_a}>;
-        phandle-by-label = <&label_a>;
+    chosen {
+        
     };
+
 };
 
 &pinctrl {

@@ -24,6 +24,9 @@
         "socket_select.h": "c",
         "compare": "c",
         "mqtt.h": "c",
-        "net_sample_common.h": "c"
+        "net_sample_common.h": "c",
+        "dns_resolve.h": "c",
+        "net_if.h": "c",
+        "tls_credentials.h": "c"
     }
 }
